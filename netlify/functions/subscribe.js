@@ -57,13 +57,15 @@ exports.handler = async (event) => {
       }),
     });
 
-    if (!res.ok) {
+   if (!res.ok) {
       const errText = await res.text();
+      console.log("MAILERLITE ERROR:", res.status, errText);
       return {
         statusCode: res.status,
         body: JSON.stringify({ error: "MailerLite request failed.", detail: errText }),
       };
     }
+    console.log("MAILERLITE SUCCESS:", email);
 
     return {
       statusCode: 200,
